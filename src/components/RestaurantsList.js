@@ -4,7 +4,7 @@ import RestaurantsDetail from '../components/RestaurantsDetail'
 
 const RestaurantsList = ({ title, restaurants }) => {
     return (
-        <View>
+        <View style={styles.container}>
             <Text style={styles.titleStyle}>{title}</Text>
             <FlatList 
                 data={restaurants}
@@ -13,15 +13,21 @@ const RestaurantsList = ({ title, restaurants }) => {
                 renderItem={({ item }) => {
                     return <RestaurantsDetail restaurant={item} />
                 }}
+                showsHorizontalScrollIndicator={false}
             />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    container: {
+        marginBottom: 10
+    },
     titleStyle: {
         fontSize: 18,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        marginBottom: 5,
+        marginLeft: 15
     }
 })
 
