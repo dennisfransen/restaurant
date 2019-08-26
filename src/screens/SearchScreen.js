@@ -8,6 +8,12 @@ const SearchScreen = () => {
     const [term, setTerm] = useState('')
     const [searchApi, restaurants, errorMessage] = useRestaurants()
 
+    const filterRestaurantsByPrice = (price) => {
+        return restaurants.filter(restaurant => {
+            return restaurant.price === price
+        })
+    }
+
     return (
         <View>
             <SearchBar 
@@ -20,9 +26,10 @@ const SearchScreen = () => {
 
             <Text>Found {restaurants.length} results</Text>
 
-            <RestaurantsList title="Cheap" />
-            <RestaurantsList title="Medium" />
-            <RestaurantsList title="Expensive" />
+            <RestaurantsList restaurants={filterRestaurantsByPrice('$')} title="Cheap" />
+            <RestaurantsList restaurants={filterRestaurantsByPrice('$$')} title="Medium" />
+            <RestaurantsList restaurants={filterRestaurantsByPrice('$$$')} title="Expensive" />
+            <RestaurantsList restaurants={filterRestaurantsByPrice('$$$$')} title="Super Expensive" />
         </View>
     )
 }
