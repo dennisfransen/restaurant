@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Image, Text, StyleSheet} from 'react-native'
+import { FontAwesome }from '@expo/vector-icons'
 
 const RestaurantsDetail = ({ restaurant }) => {
     return (
@@ -9,7 +10,7 @@ const RestaurantsDetail = ({ restaurant }) => {
                 style={styles.imageStyle}
             />
             <Text style={styles.nameStyle}>{restaurant.name}</Text>
-            <Text>{restaurant.rating} Stars, {restaurant.review_count} Reviews</Text>
+            <Text>{restaurant.rating} <FontAwesome name="star" style={{color: 'gold'}} />, {restaurant.review_count} Reviews</Text>
         </View>
     )
 }
