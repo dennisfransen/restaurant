@@ -3,9 +3,19 @@ import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native
 import { withNavigation } from 'react-navigation'
 import RestaurantsDetail from '../components/RestaurantsDetail'
 
+import { useDispatch } from 'react-redux'
+import { getRestaurant } from '../store/actions/userAction'
+
 const RestaurantsList = ({ title, restaurants, navigation }) => {
     if (!restaurants.length) {
         return null
+    }
+
+    const dispatch = useDispatch()
+
+    const storeRestaurant = (itemId, item) => {
+        dispatch(getRestaurant(item))
+        navigation.navigate('RestaurantsShow', {id: itemId})
     }
 
     return (
@@ -17,7 +27,7 @@ const RestaurantsList = ({ title, restaurants, navigation }) => {
                 keyExtractor={(restaurant) => restaurant.id}
                 renderItem={({ item }) => {
                     return (
-                        <TouchableOpacity onPress={() => navigation.navigate('RestaurantsShow', { id: item.id })}>
+                        <TouchableOpacity onPress={() => storeRestaurant(item.id, item)}>
                             <RestaurantsDetail restaurant={item} />
                         </TouchableOpacity>
                     )

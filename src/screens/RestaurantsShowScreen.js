@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native'
 import yelp from '../api/yelp'
+import { useSelector } from 'react-redux'
 
 const RestaurantsShowScreen = ({ navigation }) => {
     const [restaurant, setRestaurant] = useState(null)
+    const restaurants = useSelector(state => state.restaurants)
     const id = navigation.getParam('id')
 
     const getRestaurant = async (id) => {
@@ -13,6 +15,7 @@ const RestaurantsShowScreen = ({ navigation }) => {
 
     useEffect(() => {
         getRestaurant(id)
+        console.log(restaurants[0].name)
     }, [])
 
     if (!restaurant) {

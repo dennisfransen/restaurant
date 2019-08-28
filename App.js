@@ -1,15 +1,19 @@
-import { createStackNavigator, createAppContainer } from 'react-navigation'
-import SearchScreen from './src/screens/SearchScreen'
-import RestaurantsShowScreen from './src/screens/RestaurantsShowScreen'
+import React from 'react'
+import { View } from 'react-native'
+import Nav from './src/components/nav'
 
-const navigator = createStackNavigator({
-  Search: SearchScreen,
-  RestaurantsShow: RestaurantsShowScreen
-}, {
-  initialRouteName: 'Search',
-  defaultNavigationOptions: {
-    title: 'Restaurant Search'
-  }
-})
+import userReducer from './src/store/reducers/userReducer'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 
-export default createAppContainer(navigator)
+const Home = () => {
+  const store = createStore(userReducer)
+
+  return (
+    <Provider store={store}>
+      <Nav />
+    </Provider>
+  )
+}
+
+export default Home
